@@ -16,13 +16,13 @@ pipeline {
                 script {
                     currentBuild.displayName = params.version
                 }
-                sh 'ls'
-                sh 'cd terraform/'
-                sh 'ls'
-                sh 'terraform init -input=false'
-                sh "terraform plan -input=false -out tfplan"
-                sh 'terraform show -no-color tfplan > tfplan.txt'
+                    dir('terraform') {
+                        sh 'terraform init -input=false'
+                        sh "terraform plan -input=false -out tfplan"
+                        sh 'terraform show -no-color tfplan > tfplan.txt'
+                    }
                 }
+
             }
         }
 
