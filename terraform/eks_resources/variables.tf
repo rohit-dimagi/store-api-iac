@@ -10,21 +10,21 @@ variable "eks_cluster_name" {
 }
 
 variable "eks_cluster_endpoint" {
-  type = string
+  type        = string
   description = "EKS Cluster Endpoint"
 }
 
 variable "eks_ca_certificate" {
-  type = string
+  type        = string
   description = "EKS Cluster CA Certificate"
 }
 
 variable "eks_cluster_oidc_issuer" {
-  type = string
+  type        = string
   description = "EKS Cluster OIDC URL"
 }
 
 variable "opensearch_endpoint" {
-  type = string
+  type        = string
   description = "OpenSearch Endpoint for Fluent-Bit"
 }
