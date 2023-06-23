@@ -6,7 +6,7 @@ import base64
 from loguru import logger
 import os
 
-access_token = os.getenv("GITHUB_ACCESS_TOKEN") #"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"  
+access_token = os.getenv("GITHUB_ACCESS_TOKEN")
 repo_url = "rohit-dimagi/store-api-iac" 
 file_path = "k8s/store-api/deployment.yaml"
 
