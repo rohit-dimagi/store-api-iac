@@ -35,9 +35,11 @@ pipeline {
 
             steps {
                 script {
-                    def plan = readFile 'tfplan.txt'
-                    input message: "Do you want to apply the plan?",
+                    dir('terraform') {
+                        def plan = readFile 'tfplan.txt'
+                        input message: "Do you want to apply the plan?",
                         parameters: [text(name: 'Plan', description: 'Please review the plan', defaultValue: plan)]
+                    }
                 }
             }
         }
@@ -48,9 +50,10 @@ pipeline {
                                 accessKeyVariable: 'AWS_ACCESS_KEY_ID',
                                 credentialsId: 'terraform-aws',
                                 secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
-                ]]) {                 
-                sh "cd terraform"
-                sh "terraform apply -input=false tfplan"
+                ]]) { 
+                    dir('terraform') {           
+                        sh "terraform apply -input=false tfplan"
+                    }
                 }
             }
         }
