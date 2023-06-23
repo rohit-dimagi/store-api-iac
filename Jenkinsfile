@@ -16,7 +16,8 @@ pipeline {
                 script {
                     currentBuild.displayName = params.version
                 }
-                sh 'cd terraform'
+                sh 'ls'
+                sh 'cd terraform/'
                 sh 'ls'
                 sh 'terraform init -input=false'
                 sh "terraform plan -input=false -out tfplan"
