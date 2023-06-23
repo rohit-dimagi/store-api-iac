@@ -28,3 +28,7 @@ variable "opensearch_endpoint" {
   type        = string
   description = "OpenSearch Endpoint for Fluent-Bit"
 }
+
+variable "db_secrets" {
+  type = map(string)
+}

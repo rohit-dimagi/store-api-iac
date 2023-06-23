@@ -21,4 +21,9 @@ module "eks_resources" {
   eks_ca_certificate      = module.eks.cluster_ca_certificate
   eks_cluster_oidc_issuer = module.eks.cluster_oidc_issuer
   opensearch_endpoint     = module.eks.opensearch_endpoint
+  db_secrets = {
+    POSTGRES_USER : "plivo"
+    POSTGRES_DB : "plivo"
+    POSTGRES_HOST : "postgresql-0.postgresql-svc.default.svc.cluster.local"
+  }
 }
