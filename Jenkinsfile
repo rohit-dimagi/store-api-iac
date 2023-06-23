@@ -16,6 +16,7 @@ pipeline {
                 script {
                     currentBuild.displayName = params.version
                 }
+                sh 'cd terraform'
                 sh 'terraform init -input=false'
                 sh "terraform plan -input=false -out tfplan"
                 sh 'terraform show -no-color tfplan > tfplan.txt'
@@ -46,7 +47,7 @@ pipeline {
                                 credentialsId: 'terraform-aws',
                                 secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
                 ]]) {                 
-
+                sh "cd terraform"
                 sh "terraform apply -input=false tfplan"
                 }
             }
