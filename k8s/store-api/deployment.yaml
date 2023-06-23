@@ -15,12 +15,30 @@ spec:
       serviceAccountName: store-api-oidc
       containers:
         - name: store-api
-          image: your-registry/store-api:latest
+          image: 521558197391.dkr.ecr.ap-south-1.amazonaws.com/store-api:6
           ports:
             - containerPort: 8000
           env:
-            - name: DATABASE_URL
-              value: your-database-url
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql-secrets
+                  key: POSTGRES_PASSWORD
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql-secrets
+                  key: POSTGRES_DB
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql-secrets
+                  key: POSTGRES_USER
+            - name: POSTGRES_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql-secrets
+                  key: POSTGRES_HOST
           resources:
             requests:
               memory: "256Mi"
