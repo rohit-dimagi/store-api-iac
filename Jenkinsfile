@@ -8,13 +8,18 @@ pipeline {
     stages {
         stage('Plan') {
             steps {
-                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'terraform-aws', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) 
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',
+                                accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                                credentialsId: 'terraform-aws',
+                                secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+                ]]) { 
                 script {
                     currentBuild.displayName = params.version
                 }
                 sh 'terraform init -input=false'
                 sh "terraform plan -input=false -out tfplan"
                 sh 'terraform show -no-color tfplan > tfplan.txt'
+                }
             }
         }
 
@@ -26,7 +31,6 @@ pipeline {
             }
 
             steps {
-                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'terraform-aws', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) 
                 script {
                     def plan = readFile 'tfplan.txt'
                     input message: "Do you want to apply the plan?",
@@ -37,7 +41,14 @@ pipeline {
 
         stage('Apply') {
             steps {
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding',
+                                accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                                credentialsId: 'terraform-aws',
+                                secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+                ]]) {                 
+
                 sh "terraform apply -input=false tfplan"
+                }
             }
         }
     }
