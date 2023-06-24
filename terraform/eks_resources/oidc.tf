@@ -23,9 +23,6 @@ data "aws_iam_policy_document" "store_api_oidc_assume_role_policy" {
       type        = "Federated"
     }
   }
-  tags = merge(
-    var.tags
-  )
 }
 
 resource "aws_iam_role" "store_api_oidc" {
@@ -80,10 +77,6 @@ data "aws_iam_policy_document" "external_secrets_oidc_assume_role_policy" {
       type        = "Federated"
     }
   }
-
-  tags = merge(
-    var.tags
-  )
 }
 
 resource "aws_iam_role" "external_secrets_oidc" {
@@ -144,10 +137,6 @@ data "aws_iam_policy_document" "fluent_bit_oidc_assume_role_policy" {
       type        = "Federated"
     }
   }
-
-  tags = merge(
-    var.tags
-  )
 }
 
 resource "aws_iam_role" "fluent_bit_oidc" {
