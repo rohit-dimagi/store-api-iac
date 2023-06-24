@@ -10,21 +10,21 @@ This project is being used to spin up AWS resource for [Store-api](https://githu
  Infra :-
 * VPC
 * EKS
-* SECRET-MANAGER
-* OPENSEARCH
+* Secret-Manager
+* Opensearch
 * IRSA
 
 EKS Resources :-
-* FLUENT-BIT
-* EXTERNAL-SECRETS
-* METRICS-SERVER
-* PROMETHEUS-STACK
-* EBS CSI DRIVER
-* POSTGRESQL
-* STORE-API
-* NLB
+* Fluent-Bit
+* External-secrets
+* Metrics-server
+* Prometheus-stack
+* EBS CSI Driver
+* Postgresql
+* Store-api
+* Network LoadBalancer
 
-### pre-requiste
+### Prerequisite
 * aws access key and secret key with admin access configured and aws cli, kubectl tool installed on the system
 * s3 bucket for storing state file
 * dynamodb for locking
@@ -59,6 +59,6 @@ This repo also contains a helper script `transit/main.py` which should be run as
 It Contains Jenkins pipeline file to apply terraform and k8s changes to the environment. Every push triggers a pipeline to jenkins with Github-webhook. The pipeline does need approval for applying after producing plan.
 
 
-### ARCHITECTURE/WORKFLOW
+### Architecture Diagram
 
 ![Architecture](./docs/Arch.png?raw=true "Architecture")
