@@ -58,3 +58,7 @@ This repo also contains a helper script `transit/main.py` which should be run as
 ### Jenkins Pipeline
 It Contains Jenkins pipeline file to apply terraform and k8s changes to the environment. Every push triggers a pipeline to jenkins with Github-webhook. The pipeline does need approval for applying after producing plan.
 
+
+### ARCHITECTURE/WORKFLOW
+
+![Architecture](./docs/Arch.png?raw=true "Architecture")
