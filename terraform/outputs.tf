@@ -29,13 +29,3 @@ output "store_api_role" {
 output "external_secrets_role" {
   value = module.eks_resources.external_secrets_role
 }
-
-output "username" {
-  value     = module.eks_resources.username
-  sensitive = true
-}
-
-output "password" {
-  value     = module.eks_resources.password
-  sensitive = true
-}

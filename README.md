@@ -28,23 +28,28 @@ EKS Resources :-
 * aws access key and secret key with admin access configured and aws cli, kubectl tool installed on the system
 * s3 bucket for storing state file
 * dynamodb for locking
-* A Jenkins CI setup with access to ecr, and docker, python and git install
+* A Jenkins CI setup with access to ecr, docker, python, kubectl aws-cli and git install
 
 ### Running locally
+Since the EKS cluster is private, you need to have VPN or a bastion host configured to run this project. In this case my Jenkins-CI server is also a bastion.
 
 Build Infra for AWS
+
 ```
 $ cd terraform
+$ terraform init
 $ terraform apply
 ```
+
 Deploy K8S resources
+
 ```
 # Get the kube-config
 $ aws eks update-kubeconfig --region ap-south-1 --name demo-cluster
 $ kubectl apply -f k8s/postgresql/
 $ kubectl apply -f k8s/store-api/
 ```
-Get the DNS of LoadBalancer and open in Browser.
+Get the DNS of Network LoadBalancer and open in Browser.
 
 ### Helper script
 

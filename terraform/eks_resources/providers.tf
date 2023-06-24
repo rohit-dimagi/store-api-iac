@@ -14,10 +14,3 @@ provider "helm" {
     token                  = data.aws_eks_cluster_auth.this.token
   }
 }
-
-# provider "elasticsearch" {
-#   url = var.opensearch_endpoint
-#   username = "${split(",", data.aws_ssm_parameter.es.value)[0]}"
-#   password = "${split(",", data.aws_ssm_parameter.es.value)[1]}"
-#   healthcheck = false
-# }

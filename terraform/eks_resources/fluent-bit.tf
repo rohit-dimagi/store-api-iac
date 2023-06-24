@@ -1,27 +1,3 @@
-# resource "elasticsearch_opensearch_role" "writer" {
-#   role_name   = "logs_writer"
-#   description = "Logs writer role"
-
-#   cluster_permissions = ["*"]
-
-#   index_permissions {
-#     index_patterns  = ["*"]
-#     allowed_actions = ["write"]
-#   }
-
-#   tenant_permissions {
-#     tenant_patterns = ["*"]
-#     allowed_actions = ["kibana_all_write"]
-#   }
-# }
-
-# resource "elasticsearch_opensearch_roles_mapping" "mapper" {
-#   role_name     = "logs_writer"
-#   description   = "Mapping AWS IAM roles to ES role"
-#   backend_roles = [aws_iam_role.fluent_bit_oidc.arn]
-# }
-
-
 resource "helm_release" "fluent-bit" {
   name             = "fluent-bit"
   repository       = "https://fluent.github.io/helm-charts"

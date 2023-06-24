@@ -7,8 +7,9 @@ resource "aws_eks_cluster" "this" {
   vpc_config {
     subnet_ids              = flatten([aws_subnet.public[*].id, aws_subnet.private[*].id])
     endpoint_private_access = true
-    endpoint_public_access  = true
-    public_access_cidrs     = ["0.0.0.0/0"]
+    endpoint_public_access  = false
+    security_group_ids      = [aws_security_group.eks_cluster_additional.id]
+
   }
 
   tags = merge(
@@ -76,4 +77,52 @@ resource "aws_security_group_rule" "cluster_outbound" {
   source_security_group_id = aws_security_group.eks_nodes.id
   to_port                  = 65535
   type                     = "egress"
+}
+
+resource "aws_security_group" "eks_cluster_additional" {
+  name        = "${var.project}-eks-cluster"
+  description = "Cluster SG"
+  vpc_id      = aws_vpc.this.id
+
+  ingress = [
+    {
+      description      = "Allow API Access"
+      from_port        = 443
+      to_port          = 443
+      protocol         = "tcp"
+      cidr_blocks      = [var.vpc_cidr]
+      prefix_list_ids  = null
+      ipv6_cidr_blocks = null
+      security_groups  = null
+      self             = null
+    },
+    {
+      description      = "Allow Kubelet API Access"
+      from_port        = 10250
+      to_port          = 10250
+      protocol         = "tcp"
+      cidr_blocks      = [var.vpc_cidr]
+      prefix_list_ids  = null
+      ipv6_cidr_blocks = null
+      security_groups  = null
+      self             = null
+    },
+    {
+      description      = "Allow Cluster Access"
+      from_port        = 0
+      to_port          = 0
+      protocol         = "-1"
+      cidr_blocks      = null
+      prefix_list_ids  = null
+      ipv6_cidr_blocks = null
+      security_groups  = null
+      self             = true
+    }
+  ]
+
+
+  tags = {
+    Name        = "${var.project}-eks-cluster"
+    Description = "Cluster SG"
+  }
 }

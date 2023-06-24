@@ -32,3 +32,13 @@ variable "opensearch_endpoint" {
 variable "db_secrets" {
   type = map(string)
 }
+
+variable "tags" {
+  description = "A map of tags to add to all resources"
+  type        = map(string)
+  default = {
+    "Project"     = "demo"
+    "Environment" = "dev"
+    "Owner"       = "Terraform"
+  }
+}

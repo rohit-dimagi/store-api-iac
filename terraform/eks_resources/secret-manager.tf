@@ -5,6 +5,10 @@ resource "random_password" "password" {
 
 resource "aws_secretsmanager_secret" "db_secrets" {
   name = "store-api-db-secrets"
+
+  tags = merge(
+    var.tags
+  )
 }
 
 resource "aws_secretsmanager_secret_version" "db_secrets" {
