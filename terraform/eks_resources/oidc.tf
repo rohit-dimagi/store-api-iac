@@ -113,10 +113,6 @@ resource "aws_iam_policy" "external_secrets_policy" {
 resource "aws_iam_role_policy_attachment" "external_secrets_attach" {
   role       = aws_iam_role.external_secrets_oidc.name
   policy_arn = aws_iam_policy.external_secrets_policy.arn
-
-  tags = merge(
-    var.tags
-  )
 }
 
 
