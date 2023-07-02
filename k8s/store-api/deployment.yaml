@@ -34,7 +34,7 @@ spec:
             secretKeyRef:
               key: POSTGRES_HOST
               name: postgresql-secrets
-        image: 521558197391.dkr.ecr.ap-south-1.amazonaws.com/store-api:10
+        image: 521558197391.dkr.ecr.ap-south-1.amazonaws.com/store-api:None
         livenessProbe:
           httpGet:
             httpHeaders: null
